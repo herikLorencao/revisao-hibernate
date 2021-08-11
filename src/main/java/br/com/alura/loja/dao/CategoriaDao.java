@@ -31,7 +31,14 @@ public class CategoriaDao {
     }
 
     public List<Categoria> buscarTodos() {
-        String jqpl = "SELECT c FROM Categoria";
+        String jqpl = "SELECT c FROM Categoria c";
         return this.entityManager.createQuery(jqpl, Categoria.class).getResultList();
+    }
+
+    public List<Categoria> buscarPorNome(String nome) {
+        String jpql = "SELECT c FROM Categoria c WHERE c.nome LIKE :nome";
+        return this.entityManager.createQuery(jpql, Categoria.class)
+                .setParameter("nome", nome)
+                .getResultList();
     }
 }
